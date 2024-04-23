@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>URL Shortener</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      padding-top: 50px;
+      max-width: 1200px; /* Adjusted maximum width */
+      margin: 0 auto; /* Center the container */
+    }
+    .card {
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .card-header {
+      background-color: #007bff;
+      color: #fff;
+      font-weight: bold;
+      text-align: center;
+    }
+    .form-control, .btn {
+      border-radius: 20px;
+    }
+    .btn-primary {
+      padding: 10px 20px;
+    }
+    .table {
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .table th, .table td {
+      vertical-align: middle;
+    }
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-10"> <!-- Adjust the column width -->
+        <div class="card">
+          <div class="card-header">
+            <h1>URL Shortener</h1>
+          </div>
+          <div class="card-body">
+            <form action="/shortUrls" method="POST" class="form-inline justify-content-center">
+              <div class="form-group">
+                <input required placeholder="Enter URL" type="url" name="fullUrl" id="fullUrl" class="form-control mr-2" style="width: 100%;">
+
+              </div>
+              <button class="btn btn-primary" type="submit">Shorten URL</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-4 justify-content-center">
+      <div class="col-md-10"> <!-- Adjust the column width -->
+        <div class="card">
+          <div class="card-header">
+            <h2>Shortened URLs</h2>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Full URL</th>
+                    <th>Short URL</th>
+                    <th>Clicks</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% shortUrls.forEach(shortUrl => { %>
+                    <tr>
+                      <td><a href="<%= shortUrl.full %>"><%= shortUrl.full %></a></td>
+                      <td><a href="<%= shortUrl.short %>"><%= shortUrl.short %></a></td>
+                      <td><%= shortUrl.clicks %></td>
+                    </tr>
+                  <% }) %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
